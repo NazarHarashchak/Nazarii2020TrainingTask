@@ -13,5 +13,7 @@ namespace Training_Api.Services
         public System.Threading.Tasks.Task<Models.Task> Get(int id);
         public System.Threading.Tasks.Task<List<Models.Task>> GetTasks();
         public void Update(Models.Task task);
+        public System.Threading.Tasks.Task<List<Models.User>> GetUsers();
+        public System.Threading.Tasks.Task<List<Models.TaskStatus>> GetStatuses();
     }
 }

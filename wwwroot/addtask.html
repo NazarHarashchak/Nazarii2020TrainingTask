@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
+          integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.0.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <link rel="stylesheet" href="/css/site.css" />
+    <title>Training Task Api - Main</title>
+</head>
+<body>
+    <div class="container" >
+        <a href="index.html">Back to list</a>
+        <form class="col-sm-6" data-bind="submit: submitHandler">
+            <div class="form-row form-group">
+                <div class="col-form-label col-6">
+                    <label>Task title</label>
+                </div>
+                <div class="col-6">
+                    <input class="form-control" name="title" data-bind="event: {change: changeHandler}"/>
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-form-label col-6">
+                    <label>Task description</label>
+                </div>
+                <div class="col-6">
+                    <textarea class="form-control" name="description" data-bind="event: {change: changeHandler}"> </textarea>
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-form-label col-6">
+                    <label>Task Author</label>
+                </div>
+                <div class="col-6">
+                    <select class="form-control" name="author" data-bind="event: {change: changeHandler}, options: users, 
+                            optionsText: 'userFullName', optionsValue: 'id'" ></select>
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-form-label col-6">
+                    <label>Task Assignee</label>
+                </div>
+                <div class="col-6">
+                    <select class="form-control" name="assignee" data-bind="event: {change: changeHandler}, options: users, 
+                            optionsText: 'userFullName', optionsValue: 'id'"></select>
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-form-label col-6">
+                    <label>Task Status</label>
+                </div>
+                <div class="col-6">
+                    <select class="form-control" name="status" data-bind="event: {change: changeHandler}, options: statuses, 
+                            optionsText: 'status', optionsValue: 'id'"></select>
+                </div>
+            </div>
+            <div class="form-row form-group">
+                <div class="col-6">
+                    <input type="submit" class="form-control btn btn-dark" value="Save"/> 
+                </div>
+            </div>
+        </form>
+        <script src="/js/addTask.js"></script>
+    </div>
+</body>
+</html>

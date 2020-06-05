@@ -40,8 +40,12 @@ namespace Training_Api.Classes
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                var sqlQuery = "INSERT INTO Tasks (Title, Description) VALUES(@Title, @TaskDescription)";
-                await db.ExecuteAsync(sqlQuery, task);
+                task.DueDate = DateTime.Now;
+                string query = string.Format("INSERT INTO Tasks " +
+                    "(Title, TaskDescription, CreatedUserID, StatusID, AssigneeUserID, DueDate)" +
+                    " VALUES ('{0}','{1}',{2},{3},{4},'{5}')",
+                    task.Title, task.TaskDescription, task.CreatedUserId, task.StatusId, task.AssigneeUserId, task.DueDate.ToShortDateString());
+                await db.ExecuteAsync(query);
             }
         }
 
@@ -49,8 +53,12 @@ namespace Training_Api.Classes
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                var sqlQuery = "UPDATE Users SET Title = @Title, TaskDescription = @TaskDescription WHERE Id = @Id";
-                await db.ExecuteAsync(sqlQuery, task);
+                string query = string.Format("UPDATE Tasks SET " +
+                    "Title={0}, TaskDescription={1}, CreatedUserID={2}, StatusID={3}, AssigneeUserID={4}, DueDate={5}" +
+                    "WHERE Id = {6}",
+                    task.Title, task.TaskDescription, task.CreatedUserId, task.StatusId, task.AssigneeUserId, task.DueDate, task.Id);
+                
+                await db.ExecuteAsync(query);
             }
         }
 
@@ -60,6 +68,22 @@ namespace Training_Api.Classes
             {
                 var sqlQuery = "DELETE FROM Tasks WHERE Id = @id";
                 await db.ExecuteAsync(sqlQuery, new { id });
+            }
+        }
+        public async System.Threading.Tasks.Task<List<Models.User>> GetUsers()
+        {
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var query = string.Format("SELECT * FROM USERS");
+                return db.Query<User>(query).ToList();
+            }
+        }
+        public async System.Threading.Tasks.Task<List<Models.TaskStatus>> GetStatuses()
+        {
+            using (IDbConnection db = new SqlConnection(connectionString))
+            {
+                var query = string.Format("SELECT Id, TaskStatus AS Status FROM TaskStatuses");
+                return db.Query<Models.TaskStatus>(query).ToList();
             }
         }
     }

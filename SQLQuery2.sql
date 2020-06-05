@@ -34,3 +34,6 @@ VALUES ('In Progress'),('Completed'), ('Overdue')
 
 INSERT INTO USERS
 VALUES ('Vasyl'),('Nazar'),('Dmytro'),('Ivan'),('Petro'),('Yurii')
+
+INSERT INTO Tasks (Title, TaskDescription, CreatedUserID, StatusID, AssigneeUserID, DueDate)
+VALUES ('Exapmple', 'Example', 1,1,1,6/5/2020)
