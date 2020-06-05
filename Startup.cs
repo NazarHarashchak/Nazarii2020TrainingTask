@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Training_Api.Services;
+using Training_Api.Classes;
 
 namespace Training_Api
 {
@@ -23,6 +25,8 @@ namespace Training_Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddTransient<ITaskRepository, TaskRepository>(provider => new TaskRepository(connectionString));
             services.AddControllers();
         }
 
@@ -45,12 +49,13 @@ namespace Training_Api
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapRazorPages();
+                endpoints.MapGet("/", async context =>
+                {
+                    context.Response.Redirect("/index.html");
+                });
             });
         }
     }

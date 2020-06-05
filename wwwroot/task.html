@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
+          integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous'>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://ajax.aspnetcdn.com/ajax/knockout/knockout-3.4.0.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <link rel="stylesheet" href="/css/site.css" />
+    <title>Training Task Api - Task</title>
+</head>
+<body>
+    <div>
+        <a data-bind="attr: {href: ('/editTask.html?taskid=' + id)}"><i class="fa fa-edit"></i> Edit task</a>
+        <h2 data-bind="text: title"></h2>
+        <p data-bind="text: description"></p>
+        <p data-bind="text: author"></p>
+        <p data-bind="text: assigneeUser"></p>
+        <p data-bind="text: dueDate"></p>
+        <p data-bind="style: {color: (status === 'Completed') ? 'green' : (status === 'In Progress') ? 'orange' : (status === 'Overdue') ? 'red' : 'inherit'}">
+            <span data-bind="text: status" style="color:inherit;"></span>
+        </p>
+        <br />
+        <br />
+        <br />
+        <a href="/index.html">Back to list</a>
+    </div>
+    <script src="/js/task.js"></script>
+</body>
+</html>
